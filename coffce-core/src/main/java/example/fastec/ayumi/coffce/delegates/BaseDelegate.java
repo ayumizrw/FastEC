@@ -19,7 +19,7 @@ public abstract class BaseDelegate extends SwipeBackFragment{
     private Unbinder mUnbinder =null;
 
     public abstract Object setLayout();
-    //强制子类
+    //强制子类,控件操作
     public abstract void onBindView(@Nullable Bundle savedInstanceState,View rootView);
     @Nullable
     @Override
