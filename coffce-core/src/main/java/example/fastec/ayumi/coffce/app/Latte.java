@@ -2,9 +2,9 @@ package example.fastec.ayumi.coffce.app;
 
 import android.content.Context;
 
-import java.util.WeakHashMap;
+import java.util.HashMap;
 
-public final class latte {
+public final class Latte {
     /**
      * 返回配置,把对象的引用转入了配置项
      * @param context
@@ -19,7 +19,11 @@ public final class latte {
      * 返回 weakhashmap
      * @return
      */
-    private static WeakHashMap<String,Object> getConfinguratons(){
+    private static HashMap<String,Object> getConfinguratons(){
         return Configurator.getInstance().getLatteConfigs();
+    }
+
+    public static Context getApplication(){
+        return (Context) getConfinguratons().get(ConfigType.APPLICATION_CONTEXT.name());
     }
 }
