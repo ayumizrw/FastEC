@@ -24,6 +24,7 @@ public abstract class BaseDelegate extends SwipeBackFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+         System.out.println("111111111111111111111111111111");
         View rootView =null;
         //id 和view创建根视图
         if(setLayout() instanceof Integer){

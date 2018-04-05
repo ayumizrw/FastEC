@@ -18,6 +18,7 @@ public abstract class ProxyActivity extends SupportActivity{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+       System.out.println("111111111111111111111111111111");
         initContaniner(savedInstanceState);
     }
 
@@ -30,6 +31,7 @@ public abstract class ProxyActivity extends SupportActivity{
         container.setId(R.id.delegate_container);
         setContentView(container);
         if(savedInstanceState ==null){
+              System.out.println("2222222222222222");
             loadRootFragment(R.id.delegate_container,setRootDelegate());
         }
     }

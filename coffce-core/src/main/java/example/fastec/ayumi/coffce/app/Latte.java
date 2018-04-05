@@ -19,7 +19,7 @@ public final class Latte {
      * 返回 weakhashmap
      * @return
      */
-    private static HashMap<String,Object> getConfinguratons(){
+    public static HashMap<String,Object> getConfinguratons(){
         return Configurator.getInstance().getLatteConfigs();
     }
 
