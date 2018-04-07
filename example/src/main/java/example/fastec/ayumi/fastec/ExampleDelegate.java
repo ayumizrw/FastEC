@@ -3,6 +3,7 @@ package example.fastec.ayumi.fastec;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import example.fastec.ayumi.coffce.delegates.LatteDelegate;
 import example.fastec.ayumi.coffce.net.RestClient;
@@ -18,17 +19,17 @@ public class ExampleDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-
+        TestRestCilent();
     }
 
     private void TestRestCilent(){
         RestClient.builder()
-                .url("")
-                .params("","")
+                .url("https://news.baidu.com")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String Response) {
-
+                        System.out.print(Response);
+                        Toast.makeText(getContext(),Response,Toast.LENGTH_SHORT).show();
                     }
                 })
                 .failure(new IFailure() {
@@ -43,6 +44,7 @@ public class ExampleDelegate extends LatteDelegate {
 
                     }
                 })
-                .build();
+                .build()
+                .get();
     }
 }
