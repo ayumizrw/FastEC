@@ -1,7 +1,6 @@
 package example.fastec.ayumi.coffce.delegates;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,6 @@ public abstract class BaseDelegate extends SwipeBackFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         System.out.println("111111111111111111111111111111");
         View rootView =null;
         //id 和view创建根视图
         if(setLayout() instanceof Integer){

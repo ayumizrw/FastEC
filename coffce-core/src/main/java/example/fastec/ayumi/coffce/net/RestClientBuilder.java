@@ -1,5 +1,7 @@
 package example.fastec.ayumi.coffce.net;
 
+import android.content.Context;
+
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -7,6 +9,7 @@ import example.fastec.ayumi.coffce.net.callback.IError;
 import example.fastec.ayumi.coffce.net.callback.IFailure;
 import example.fastec.ayumi.coffce.net.callback.IRequest;
 import example.fastec.ayumi.coffce.net.callback.ISuccess;
+import example.fastec.ayumi.coffce.ui.LoaderStyle;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -14,13 +17,15 @@ import okhttp3.RequestBody;
  *
  */
 public class RestClientBuilder {
-    private  String mUrl;
+    private  String mUrl = null;
     private  static final WeakHashMap<String,Object> PARAMS = RestCreator.getParams();
-    private  IRequest mIRequest;
-    private  ISuccess mISuccess;
-    private  IError mIError;
-    private  IFailure mIFailure;
-    private  RequestBody mBody;
+    private  IRequest mIRequest= null;
+    private  ISuccess mISuccess= null;
+    private  IError mIError= null;
+    private  IFailure mIFailure= null;
+    private  RequestBody mBody= null;
+    private  Context mContext= null;
+    private  LoaderStyle mLoaderStyle= null;
 
     RestClientBuilder(){
 
@@ -74,11 +79,25 @@ public class RestClientBuilder {
         this.mIError =iError;
         return this;
     }
+    public final RestClientBuilder loader(Context context,LoaderStyle loaderStyle){
+        this.mContext =context;
+        this.mLoaderStyle =loaderStyle;
+        return this;
+    }
 
-
+    /**
+     * 重载，默认的央视
+     * @param context
+     * @return
+     */
+    public final RestClientBuilder loader(Context context){
+        this.mContext =context;
+        this.mLoaderStyle =LoaderStyle.BallClipRotatePulseIndicator;
+        return this;
+    }
 
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIError,mIFailure,mBody);
+        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIError,mIFailure,mBody,mContext,mLoaderStyle);
     }
 
 }

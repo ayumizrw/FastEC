@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.1.1'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
     }
 }
@@ -20,4 +20,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+ext {
+    compileSdkVersion = 27
+    buildToolsVersion = "27.0.3"
+    minSdkVersion = 14
+    targetSdkVersion = compileSdkVersion
+
+    v4Version = "27.1.0"
 }

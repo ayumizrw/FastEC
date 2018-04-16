@@ -1,5 +1,7 @@
 package example.fastec.ayumi.coffce.net;
 
+import android.content.Context;
+
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -8,6 +10,8 @@ import example.fastec.ayumi.coffce.net.callback.IFailure;
 import example.fastec.ayumi.coffce.net.callback.IRequest;
 import example.fastec.ayumi.coffce.net.callback.ISuccess;
 import example.fastec.ayumi.coffce.net.callback.RequestCallBacks;
+import example.fastec.ayumi.coffce.ui.LatteLoader;
+import example.fastec.ayumi.coffce.ui.LoaderStyle;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +28,8 @@ public class RestClient {
     private final IError ERROR;
     private final IFailure FAILURE;
     private final RequestBody BODY;
+    private final LoaderStyle LOADER_STYLE;
+    private final Context CONTEXT;
 
     public RestClient(String URL,
                       Map<String, Object> params,
@@ -31,7 +37,9 @@ public class RestClient {
                       ISuccess SUEECSS,
                       IError ERROR,
                       IFailure FAILURE,
-                      RequestBody BODY) {
+                      RequestBody BODY,
+                      Context context,
+                      LoaderStyle loaderStyle) {
         this.URL = URL;
        PARAMS.putAll(params);
         this.REQUEST = REQUEST;
@@ -39,6 +47,8 @@ public class RestClient {
         this.ERROR = ERROR;
         this.FAILURE = FAILURE;
         this.BODY = BODY;
+        this.CONTEXT =context;
+        this.LOADER_STYLE =loaderStyle;
     }
 
     public static RestClientBuilder builder(){
@@ -49,6 +59,12 @@ public class RestClient {
         final RestService service = RestCreator.getRestService();
         Call<String>  call =null;
 
+        if(REQUEST != null){
+            REQUEST.onRequestStart();
+        }
+        if(LOADER_STYLE !=null){
+            LatteLoader.showloading(CONTEXT,LOADER_STYLE);
+        }
         switch (httpMetod){
             case GET:
                 call =service.get(URL,PARAMS);
@@ -74,7 +90,7 @@ public class RestClient {
     }
 
     private Callback<String> getRequestCallBack(){
-        return new RequestCallBacks(REQUEST,SUEECSS,ERROR,FAILURE);
+        return new RequestCallBacks(REQUEST,SUEECSS,ERROR,FAILURE, LOADER_STYLE);
     }
     /**
      * 具体使用方法
